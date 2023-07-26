@@ -31,6 +31,8 @@ def search():
 
 @app.route('/new')
 def create():
+    if request.args.get("isbn") in map(lambda b: b.isbn, Book.books):
+        return f"{request.args.get('isbn')} is already in use", 403
     book = Book(**request.args, fromrepr=True)
     return f"Added new book: {str(book)}"
 
