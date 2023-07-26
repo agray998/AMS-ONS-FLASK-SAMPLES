@@ -1,6 +1,7 @@
 from application import app
 from application.book import Book
 from flask import request
+from random import choice
 
 def book_builder(book):
     return {
@@ -58,3 +59,9 @@ def validate_isbn(isbn):
         "isbn": isbn,
         "valid": Book.valid_isbn(isbn)
     }
+
+@app.route('/suggested')
+def suggestion():
+    genre = request.args.get("genre", "")
+    options = list(filter(lambda b: b.genre == genre, Book.books))
+    return book_builder(choice(options if genre else Book.books))
