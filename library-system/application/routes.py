@@ -1,5 +1,5 @@
 from application import app
-from application.book import *
+from application.book import Book
 from flask import request
 
 def book_builder(book):
@@ -13,7 +13,15 @@ def book_builder(book):
 
 @app.route('/')
 def index():
-    return "Library Management System"
+    return '''
+    Library Management System<br>
+    Endpoints:<br>
+    /search -> search for books by author<br>
+    /new -> add a new book<br>
+    /update -> update a book<br>
+    /delete -> delete a book<br>
+    /validate -> check the validity of an ISBN
+    '''
 
 @app.route('/search')
 def search():
@@ -28,7 +36,7 @@ def create():
 @app.route('/update/<isbn>')
 def update(isbn):
     for book in Book.books:
-        if book.isbn == isbn:
+        if book.isbn.replace("-", "") == isbn.replace("-", ""):
             book.title = request.args.get("title", book.title)
             book.author = request.args.get("author", book.author)
             book.genre = request.args.get("genre", book.genre)
@@ -39,7 +47,7 @@ def update(isbn):
 @app.route('/delete/<isbn>')
 def delete(isbn):
     for i, book in enumerate(Book.books):
-        if book.isbn == isbn:
+        if book.isbn.replace("-", "") == isbn.replace("-", ""):
             del Book.books[i]
             break
     return f"Deleted book with ISBN: {isbn}"
