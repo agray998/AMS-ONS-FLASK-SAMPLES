@@ -43,3 +43,10 @@ def delete(isbn):
             del Book.books[i]
             break
     return f"Deleted book with ISBN: {isbn}"
+
+@app.route('/validate/<isbn>')
+def validate_isbn(isbn):
+    return {
+        "isbn": isbn,
+        "valid": Book.valid_isbn(isbn)
+    }
