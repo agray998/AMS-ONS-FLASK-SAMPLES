@@ -35,18 +35,3 @@ class Book():
     
     def __repr__(self):
         return f"Book('{self.title}', {self.pages}, '{self.isbn}', '{self.genre}', fromrepr=True, author='{self.author}')"
-
-
-class SciFiNovel(Book):
-    def __init__(self, title, pages, isbn, fromrepr = False, author = "Unknown", bookfile="books.list"):
-        super().__init__(title=title, pages=pages, isbn=isbn, genre="sci-fi", fromrepr=fromrepr, author=author, bookfile=bookfile)
-    
-    def __str__(self):
-        return f"Written by {self.author}, {self.title} is a thrilling {self.pages}-page science fiction masterpiece"
-    
-class FantasyNovel(Book):
-    def __init__(self, title, pages, isbn, fromrepr = False, author = "Unknown", bookfile="books.list"):
-        super().__init__(title=title, pages=pages, isbn=isbn, genre="fantasy", fromrepr=fromrepr, author=author, bookfile=bookfile)
-    
-    def __str__(self):
-        return f"Written by {self.author}, {self.title} is a thrilling {self.pages}-page masterclass in fantasy worldbuilding"
