@@ -3,7 +3,17 @@ from application.book import Book
 from flask import request
 from application import app
 
-# No need to test index since there is no logic, it just returns a literal
+def test_index():
+    assert index() == '''
+    Library Management System<br>
+    Endpoints:<br>
+    /search -> search for books by author<br>
+    /new -> add a new book<br>
+    /update -> update a book<br>
+    /delete -> delete a book<br>
+    /validate -> check the validity of an ISBN
+    /suggested -> get a random recommendation
+    '''
 
 def test_create():
     with app.test_request_context():
