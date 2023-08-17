@@ -1,0 +1,5 @@
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip3 install flask pytest pytest-cov
+ENTRYPOINT python3 -m pytest --cov=application
